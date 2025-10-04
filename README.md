@@ -16,6 +16,8 @@ cd credfeto-aur2repo
 Optional:
 * Configure `/etc/makepkg.conf` as appropriate [MAN](https://man.archlinux.org/man/makepkg.conf.5)
 * Configure `/etc/pacman.conf` as appropriate [MAN](https://man.archlinux.org/man/pacman.conf.5)
+* Configure TLS in nginx.conf or haproxy 
+
 
 ## Installing - Client
 
