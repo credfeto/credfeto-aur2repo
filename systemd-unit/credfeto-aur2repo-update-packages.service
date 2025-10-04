@@ -8,5 +8,5 @@ Type=oneshot
 IOSchedulingClass=idle
 CPUSchedulingPolicy=idle
 WorkingDirectory=/home/markr/work/credfeto-aur2repo
-ExecStart=/bin/flock -n /tmp/devpkg.lock -c /home/markr/work/credfeto-aur2repo/update-packages
+ExecStart=/usr/bin/flock -n /tmp/update-packages.lock -c /home/markr/work/credfeto-aur2repo/update-packages
 
