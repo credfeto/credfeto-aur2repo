@@ -49,7 +49,7 @@ if [ -z "$PACMAN_REPO" ]; then
     echo "SigLevel = Optional TrustAll"
     echo "Server = file:///srv/http/aur"
     echo ""
-  } | | sudo tee -a /etc/pacman.conf
+  } | sudo tee -a /etc/pacman.conf
 
 fi
 
