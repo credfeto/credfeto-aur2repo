@@ -45,8 +45,8 @@ sudo cp "$BASEDIR/systemd-unit/credfeto-aur2repo-update-packages.timer" /etc/sys
 echo "systemd reload"
 sudo systemctl daemon-reload
 
-echo "Enable credfeto-aur2repo-update-package.timer"
-sudo systemctl enable credfeto-aur2repo-update-package.timer
+echo "Enable credfeto-aur2repo-update-packages.timer"
+sudo systemctl enable credfeto-aur2repo-update-packages.timer
 
-echo "Start credfeto-aur2repo-update-package.timer"
-sudo systemctl start credfeto-aur2repo-update-package.timer
+echo "Start credfeto-aur2repo-update-packages.timer"
+sudo systemctl start credfeto-aur2repo-update-packages.timer
