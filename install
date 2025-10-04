@@ -12,7 +12,7 @@ USERNAME=aur-builder
 export AUR_LOCATION=https://aur.markridgwell.com
 
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm aurutils yay base-devel debugedit fakeroot jq util-linux
+sudo pacman -S --needed --noconfirm aurutils yay base-devel debugedit fakeroot jq util-linux nginx
 
 echo "Ensure $USERNAME exists"
 if id "$USERNAME" >/dev/null 2>&1; then
@@ -36,6 +36,12 @@ echo "Create Repo"
 [ -f "/srv/http/aur/aur.db.tar.bz2" ] || sudo repo-add /srv/http/aur/aur.db.tar.bz2
 sudo chown "$USERNAME:$USERNAME" -R /srv/http/aur
 
+echo "Configuring NGINX"
+sudo cp "$BASEDIR/nginx.conf" /etc/nginx/nginx.conf
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo nginx -s reload
+
 echo "Updating systemd scripts"
 
 echo "* credfeto-aur2repo-update-packages"
@@ -47,3 +53,4 @@ echo "  - Enable credfeto-aur2repo-update-packages.timer"
 sudo systemctl enable credfeto-aur2repo-update-packages.timer
 echo "  - Start credfeto-aur2repo-update-packages.timer"
 sudo systemctl start credfeto-aur2repo-update-packages.timer
+
