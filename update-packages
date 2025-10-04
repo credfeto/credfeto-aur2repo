@@ -20,6 +20,6 @@ do
    echo "*****************************************************************************"
    echo ""
 
-   sudo -E su "$USERNAME" -c "aur sync --noview --noconfirm --rebuild $PACKAGE"
+   sudo -E su "$USERNAME" -c "aur sync --noview --noconfirm $PACKAGE"
 done
 
