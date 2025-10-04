@@ -1,0 +1,11 @@
+#! /bin/sh
+
+BASEDIR=$(dirname "$(readlink -f "$0")")
+
+die() {
+  echo "$1"
+  exit 1
+}
+
+find /srv/http/pacman-cache/ -type d -exec paccache -v -r -k 2 -c {} \;
+paccache -v -r -k 2 -c /srv/http/aur/

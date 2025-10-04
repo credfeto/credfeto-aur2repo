@@ -14,7 +14,7 @@ export AUR_LOCATION=https://aur.markridgwell.com
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm aurutils yay base-devel debugedit fakeroot jq
 
-
+""
 echo "Ensure $USERNAME exists"
 if id "$USERNAME" >/dev/null 2>&1; then
     echo "* User $USERNAME found"
