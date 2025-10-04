@@ -1,0 +1,25 @@
+#! /bin/sh
+
+BASEDIR=$(dirname "$(readlink -f "$0")")
+
+die() {
+  echo "$1"
+  exit 1
+}
+
+
+USERNAME=aur-builder
+export AUR_LOCATION=https://aur.markridgwell.com
+
+sudo pacman -Syu --noconfirm
+
+for PACKAGE in $(curl -s https://aur.markridgwell.com/cache | jq -r '.[] | .repo');
+do
+   echo "*****************************************************************************"
+   echo "Package: $PACKAGE"
+   echo "*****************************************************************************"
+   echo ""
+
+   sudo -E su "$USERNAME" -c "aur sync --noview --noconfirm --rebuild $PACKAGE"
+done
+

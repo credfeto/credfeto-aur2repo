@@ -1,0 +1,40 @@
+#! /bin/sh
+
+BASEDIR=$(dirname "$(readlink -f "$0")")
+
+die() {
+  echo "$1"
+  exit 1
+}
+
+
+USERNAME=aur-builder
+export AUR_LOCATION=https://aur.markridgwell.com
+
+sudo pacman -Syu --noconfirm
+sudo pacman -S --needed --noconfirm aurutils yay base-devel debugedit fakeroot jq
+
+
+echo "Ensure $USERNAME exists"
+if id "$USERNAME" >/dev/null 2>&1; then
+    echo "* User $USERNAME found"
+else
+  echo "* User $USERNAME not found"
+  sudo useradd \
+       --create-home \
+       --system \
+       --user-group \
+       --shell /bin/bash \
+       --comment "AUR Builder" \
+       "$USERNAME"
+fi
+
+echo "* Add user to sudoers"
+echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" | sudo tee "/etc/sudoers.d/$USERNAME"
+
+[ -d "/srv/http/aur" ] || sudo sudo mkdir -p /srv/http/aur
+[ -f "/srv/http/aur/aur.db.tar.bz2" ] || sudo repo-add /srv/http/aur/aur.db.tar.bz2
+
+sudo chown "$USERNAME:$USERNAME" -R /srv/http/aur
+
+
