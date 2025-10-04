@@ -39,7 +39,7 @@ sudo chown "$USERNAME:$USERNAME" -R /srv/http/aur
 
 
 echo "Updating systemd scripts"
-cat "$BASEDIR/systemd-unit/credfeto-aur2repo-update-packages.service" | sed "s:/home/markr/work/credfeto-aur2repo-update-packages:$BASEDIR:g" | sudo tee /etc/systemd/system/credfeto-aur2repo-update-packages.service
+cat "$BASEDIR/systemd-unit/credfeto-aur2repo-update-packages.service" | sed "s:/home/markr/work/credfeto-aur2repo:$BASEDIR:g" | sudo tee /etc/systemd/system/credfeto-aur2repo-update-packages.service
 sudo cp "$BASEDIR/systemd-unit/credfeto-aur2repo-update-packages.timer" /etc/systemd/system/credfeto-aur2repo-update-packages.timer
 
 echo "systemd reload"
