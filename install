@@ -40,6 +40,19 @@ echo "Updating pacman.conf"
 sudo sed -i "s/#CleanMethod = KeepInstalled/CleanMethod = KeepCurrent/" /etc/pacman.conf
 sudo sed -i "s/CleanMethod = KeepInstalled/CleanMethod = KeepCurrent/" /etc/pacman.conf
 
+PACMAN_REPO=$(grep "Server = file:///srv/http/aur" /etc/pacman.conf)
+if [ -z "$PACMAN_REPO" ]; then
+  echo "* Installing aur repo"
+  {
+    echo ""
+    echo "[aur]"
+    echo "SigLevel = Optional TrustAll"
+    echo "Server = file:///srv/http/aur"
+    echo ""
+  } | | sudo tee -a /etc/pacman.conf
+
+fi
+
 echo "Configuring NGINX"
 sudo cp "$BASEDIR/nginx.conf" /etc/nginx/nginx.conf
 sudo systemctl enable nginx
