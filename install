@@ -36,6 +36,10 @@ echo "Create Repo"
 [ -f "/srv/http/aur/aur.db.tar.bz2" ] || sudo repo-add /srv/http/aur/aur.db.tar.bz2
 sudo chown "$USERNAME:$USERNAME" -R /srv/http/aur
 
+echo "Updating pacman.conf"
+sudo sed -i "s/#CleanMethod = KeepInstalled/CleanMethod = KeepCurrent/" /etc/pacman.conf
+sudo sed -i "s/CleanMethod = KeepInstalled/CleanMethod = KeepCurrent/" /etc/pacman.conf
+
 echo "Configuring NGINX"
 sudo cp "$BASEDIR/nginx.conf" /etc/nginx/nginx.conf
 sudo systemctl enable nginx
