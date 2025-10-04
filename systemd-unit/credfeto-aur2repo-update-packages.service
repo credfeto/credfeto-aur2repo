@@ -3,7 +3,6 @@ Description=Update AUR Package Cache
 After=network.target
 
 [Service]
-User=markr
 Type=oneshot
 IOSchedulingClass=idle
 CPUSchedulingPolicy=idle
