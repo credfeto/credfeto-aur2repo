@@ -12,7 +12,7 @@ USERNAME=aur-builder
 export AUR_LOCATION=https://aur.markridgwell.com
 
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm aurutils yay base-devel debugedit fakeroot jq flock
+sudo pacman -S --needed --noconfirm aurutils yay base-devel debugedit fakeroot jq util-linux
 
 echo "Ensure $USERNAME exists"
 if id "$USERNAME" >/dev/null 2>&1; then
