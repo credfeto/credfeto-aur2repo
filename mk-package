@@ -1,0 +1,23 @@
+#! /bin/sh
+
+BASEDIR=$(dirname "$(readlink -f "$0")")
+
+die() {
+  echo "$1"
+  exit 1
+}
+
+
+USERNAME=aur-builder
+export AUR_LOCATION=https://aur.markridgwell.com
+
+PACKAGE=$1
+[ -z "$PACKAGE" ] && die "No package specified"
+
+echo "*****************************************************************************"
+echo "Package: $PACKAGE"
+echo "*****************************************************************************"
+echo ""
+
+sudo -E su "$USERNAME" -c "aur sync --noview --noconfirm $PACKAGE"
+
